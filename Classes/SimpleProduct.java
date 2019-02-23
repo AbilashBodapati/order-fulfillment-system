@@ -18,6 +18,18 @@ public class SimpleProduct implements Product {
     private int quantity;
     private boolean inStock;
 
+    // Constructor method
+    public SimpleProduct() {
+        // New Simple product
+
+        this.name = "";
+        this.type = "";
+        this.price = 0.0;
+        this.quantity = 0;
+        this.inStock = false;
+
+    }
+
     // Method to set the Name of the Product
     @Override
     public void setName(String name) {
