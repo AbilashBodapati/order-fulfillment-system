@@ -5,7 +5,7 @@
  * @version 20190222
  *
  */
-public class ProductTest {
+public class ProductTest_SetterAndGetters {
 
     /**
      * Method to return the set Product.
@@ -42,6 +42,19 @@ public class ProductTest {
      */
     public static void getInfo(Product sampleProduct) {
 
+        System.out.println("Sample Product Information recieved");
+        System.out.println("--------------------------------------");
+        System.out
+                .println("Name got using class is: " + sampleProduct.getName());
+        System.out
+                .println("Type got using class is: " + sampleProduct.getType());
+        System.out.println(
+                "Price got using class is: " + sampleProduct.getPrice());
+        System.out.println(
+                "Quantity got using class is: " + sampleProduct.getQuantity());
+        System.out.println("In-Stock got using class is: "
+                + sampleProduct.getInStock() + "\n");
+
     }
 
     /**
@@ -67,6 +80,14 @@ public class ProductTest {
         double price = 19.95;
         int quantity = 100;
         boolean inStock = true;
+
+        System.out.println("Sample Product Information");
+        System.out.println("--------------------------------------");
+        System.out.println("Name got is: " + name);
+        System.out.println("Type got is: " + type);
+        System.out.println("Price got is: " + price);
+        System.out.println("Quantity got is: " + quantity);
+        System.out.println("In-Stock got is: " + inStock + "\n");
 
         // Setting information
         Product sampleProduct = setInfo(name, type, price, quantity, inStock);
