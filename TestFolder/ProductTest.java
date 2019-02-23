@@ -20,14 +20,23 @@ public class ProductTest {
     public static Product setInfo(String name, String type, double price,
             int quantity, boolean inStock) {
 
+        // Initializing
         Product sampleProduct = new SimpleProduct();
 
+        // Setting
+        sampleProduct.setName(name);
+        sampleProduct.setType(type);
+        sampleProduct.setPrice(price);
+        sampleProduct.setQuantity(quantity);
+        sampleProduct.setInStock(inStock);
+
+        // Returning
         return sampleProduct;
 
     }
 
     /**
-     *
+     * Void Method to Print out the Sample Information.
      *
      * @param sampleProduct
      */
