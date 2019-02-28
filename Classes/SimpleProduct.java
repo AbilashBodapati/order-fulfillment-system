@@ -103,8 +103,21 @@ public class SimpleProduct implements Product {
     // Boolean method to check if there is next product
     @Override
     public boolean readNextProduct(Scanner inFile) {
-        // TODO Auto-generated method stub
-        return false;
+
+        boolean productPresent = true;
+
+        int lineNumber = 1;
+        while (inFile.hasNext() && lineNumber <= 5) {
+            String content = inFile.nextLine();
+            if ((lineNumber == 1) || (lineNumber == 2) || (lineNumber == 3)
+                    || (lineNumber == 4)) {
+                if (!inFile.hasNext()) {
+                    productPresent = false;
+                }
+            }
+        }
+
+        return productPresent;
     }
 
     // Override equals method
