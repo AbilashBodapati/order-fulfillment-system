@@ -115,6 +115,7 @@ public class SimpleProduct implements Product {
                     productPresent = false;
                 }
             }
+            lineNumber++;
         }
 
         return productPresent;
