@@ -95,6 +95,39 @@ public class ProductTest_SetterAndGetters {
         // Getting information
         getInfo(sampleProduct);
 
+        // using the toString method in the class.
+        System.out.println("");
+        System.out.println("-------------String Method-------------");
+        String productString = sampleProduct.toString();
+        System.out.println(productString);
+
+        // Checking if equals method can detect same products based on name and type.
+        System.out.println("\n" + "-------------equals method-------------");
+        Product sampleProductSame = setInfo(name, type, 30, 50, inStock);
+        boolean same = sampleProductSame.equals(sampleProduct);
+        if (same == true) {
+            System.out.println("They are the same");
+        } else {
+            System.out.println("They are not the same");
+        }
+
+        // Create a second product
+        String name2 = "The Dark Knight";
+        String type2 = "DVD";
+        double price2 = 19.95;
+        int quantity2 = 100;
+        boolean inStock2 = true;
+
+        Product sampleProduct2 = setInfo(name2, type2, price2, quantity2,
+                inStock2);
+
+        boolean same2 = sampleProduct2.equals(sampleProduct);
+        if (same2 == true) {
+            System.out.println("They are the same");
+        } else {
+            System.out.println("They are not the same");
+        }
+
     }
 
 }
