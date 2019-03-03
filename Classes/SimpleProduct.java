@@ -124,14 +124,35 @@ public class SimpleProduct implements Product {
     @Override
     public boolean equals(Object obj) {
 
-        return false;
+        boolean result = false;
+
+        // Check if the object passed is of same type
+        if (obj instanceof SimpleProduct) {
+            // Cast object
+            SimpleProduct compare = (SimpleProduct) obj;
+
+            // if-else statement to check if track info matches
+            if (this.name.equals(compare.name)
+                    && (this.type.equals(compare.type))) {
+                result = true;
+            } else {
+                result = false;
+            }
+        }
+        return result;
     }
 
     // Override toString method
     @Override
     public String toString() {
 
-        return "";
+        // name of the product, the type of the product,
+        //the price and the quantity of the product as a comma-separated list enclosed in parentheses
+
+        String str = "(" + this.name + ", " + this.type + ", " + this.price
+                + ", " + this.quantity + ")";
+
+        return str;
     }
 
 }
