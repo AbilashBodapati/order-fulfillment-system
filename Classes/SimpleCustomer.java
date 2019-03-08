@@ -10,6 +10,9 @@
  */
 public class SimpleCustomer {
 
+    /*
+     * PRIVATE MEMBERS
+     */
     private String lastName;
     private String firstName;
     private String address;
@@ -18,6 +21,9 @@ public class SimpleCustomer {
     private String zip;
     private double salesTax;
 
+    /*
+     * Constructor Class
+     */
     public SimpleCustomer() {
 
         this.lastName = "";
@@ -29,6 +35,11 @@ public class SimpleCustomer {
         this.salesTax = 0.0;
 
     }
+
+    /*
+     * Getters and Setters
+     *
+     */
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -89,6 +100,24 @@ public class SimpleCustomer {
 
     public double getSalesTax() {
         return this.salesTax;
+    }
+
+    /*
+     * Overriden toString method to match the client's requirements.
+     *
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+
+        String str = String.format("%10s %s \n" + "%22s \n" + "%16s %s %s",
+                this.firstName, this.lastName, this.address, this.city,
+                this.state, this.zip);
+
+        return str;
+
     }
 
 }
