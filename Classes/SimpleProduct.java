@@ -24,7 +24,7 @@ public class SimpleProduct implements Product {
 
         this.name = "";
         this.type = "";
-        this.price = 0.0;
+        this.price = 0;
         this.quantity = 0;
         this.inStock = false;
 
