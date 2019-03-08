@@ -1,7 +1,6 @@
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -29,8 +28,6 @@ public class ProductReportWithSimpleCustomer {
         // Create a new Object of ArrayList holding Strings
         SimpleCustomer info = new SimpleCustomer();
 
-        // Needs this line to remove the extra line
-        file.nextLine();
         // Last Name
         String lastname = file.nextLine();
         // set the last name in the info.
@@ -74,20 +71,20 @@ public class ProductReportWithSimpleCustomer {
      *
      * @param customer
      */
-    public static void customerInfoToString(ArrayList<String> customer) {
-
-        // Printf statements to print the customer's details
-        System.out.printf("%10s " + "%s", customer.get(1), customer.get(0));
-        System.out.println("");
-        System.out.printf("%22s ", customer.get(2));
-        System.out.println("");
-        System.out.printf("%16s " + "%s " + "%s", customer.get(3),
-                customer.get(4), customer.get(5));
-        System.out.println("");
-        System.out.println(
-                "------------------------------------------------------------------------------------");
-
-    }
+    /*
+     * public static void customerInfoToString(ArrayList<String> customer) {
+     *
+     * // Printf statements to print the customer's details
+     * System.out.printf("%10s " + "%s", customer.get(1), customer.get(0));
+     * System.out.println(""); System.out.printf("%22s ", customer.get(2));
+     * System.out.println(""); System.out.printf("%16s " + "%s " + "%s",
+     * customer.get(3), customer.get(4), customer.get(5));
+     * System.out.println(""); System.out.println(
+     * "------------------------------------------------------------------------------------"
+     * );
+     *
+     * }
+     */
 
     /**
      * Create a Product and store the product in a Queue.
@@ -334,12 +331,9 @@ public class ProductReportWithSimpleCustomer {
 
             // A SimpleCustomer class to store the customer information.
             SimpleCustomer customer = customerInfo(file);
-            // Double to store the sales tax from the customer section of the file.
-            double salesTax = file.nextDouble();
 
             // Void calls to discard the customer info and sales tax from the file copy.
             customerInfo(fileCopy);
-            fileCopy.nextDouble();
 
             // Two Queues to run through for fulfilled (using Queue) and delayed (using Stack).
             Queue<Product> orders = orders(file);
@@ -354,12 +348,16 @@ public class ProductReportWithSimpleCustomer {
             // Print out the Fulfilled part of the order.
             System.out.println("");
             System.out.println("Shipping To: ");
-            customerInfoToString(customer);
-            reportFulfilledOrders(fulfilled, salesTax);
+            System.out.println(customer.toString());
+            System.out.println(
+                    "------------------------------------------------------------------------------------");
+            reportFulfilledOrders(fulfilled, customer.getSalesTax());
 
             // Print out the Delayed part of the order.
             System.out.println("Orders Outstanding For:");
-            customerInfoToString(customer);
+            System.out.println(customer.toString());
+            System.out.println(
+                    "------------------------------------------------------------------------------------");
             reportDelayedOrders(delayed);
 
             // Close all the i/o streams to prevent i/o leaks.
