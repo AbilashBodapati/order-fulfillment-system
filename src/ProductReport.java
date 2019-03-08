@@ -1,14 +1,17 @@
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * Main Reporting UI for Customers to Interact.
+ * Main Reporting UI for Customers to Interact. Has the extra credit for output
+ * file generator implemented.
  *
  * @author Abilash Bodapati
  * @version 20190222
@@ -290,6 +293,94 @@ public class ProductReport {
     }
 
     /**
+     * This is part of the Extra Credit.
+     *
+     * @param delayed
+     * @throws IOException
+     */
+    public static void fileOutput(Stack<Product> delayed) throws IOException {
+        // Ask the client if they want to create a file for delayed products.
+        System.out.print("What do you want to name your output file: ");
+        Scanner outName = new Scanner(System.in);
+        String outfileName = outName.nextLine();
+
+        // Convert the string into a file
+        File file = new File(outfileName);
+        // Check is file exists in the directory.
+        if (!file.exists()) {
+
+            // Create a new file writer object to write the product details into
+            //  the file
+            FileWriter writer = new FileWriter(outfileName);
+
+            // file Header
+            writer.write("This file contains the Delayed Products");
+            writer.write("\n");
+            writer.write("-----------------------------------------\n");
+
+            // Iterator to go through the stack.
+            Iterator<Product> iter = delayed.iterator();
+
+            // Create a new stack to hold the elements in their original order
+            //  as the input file
+            Stack<Product> reversed = new Stack<>();
+
+            // Remove the elements from a stack and add the element into a new one.
+            while (iter.hasNext()) {
+                Product element = iter.next();
+                reversed.push(element);
+            }
+
+            // Create a new iterator for the stack with the original order.
+            Iterator<Product> iterReversed = reversed.iterator();
+
+            // Loop through the new stack using iterator
+            while (iterReversed.hasNext()) {
+                // Remove the element
+                Product element = iterReversed.next();
+
+                // Write statements to print out the product information line by line.
+                writer.write(element.getName());
+                writer.write("\n");
+                writer.write(element.getType());
+                writer.write("\n");
+                writer.write("" + element.getPrice());
+                writer.write("\n");
+                writer.write("" + element.getQuantity());
+                writer.write("\n");
+                writer.write("" + element.getInStock());
+                writer.write("\n");
+                // Additional line to partition between products for better visualization
+                writer.write("--------------------------\n");
+            }
+
+            // Letting the client know to refresh the folder and check for the file
+            System.out.println("\nPlease refresh the folder.");
+            System.out.println(
+                    "\"" + outfileName + "\"" + " has been generated.");
+
+            // End of the program.
+            System.out.println("Thank you for using this program!");
+
+            // Flush all the write statements to see the file in the folder
+            writer.flush();
+
+            // Close the i/o Streams.
+            writer.close();
+        } else {
+            // Print an error to let the client know that there is a file with
+            //  the same name.
+            System.err.println("There is a file that exists under this name.");
+            System.err
+                    .println("Please try again with a different output name.");
+        }
+
+        // Close the i/o Streams.
+        outName.close();
+
+    }
+
+    /**
      * @param args
      */
     public static void main(String[] args) {
@@ -305,6 +396,7 @@ public class ProductReport {
             // Two file copies to work with for queue and stack part for the project.
             Scanner file = new Scanner(new File(fileName));
             Scanner fileCopy = new Scanner(new File(fileName));
+            Scanner fileCopy2 = new Scanner(new File(fileName));
 
             // An Array List to store the customer information.
             ArrayList<String> customer = customerInfo(file);
@@ -314,16 +406,20 @@ public class ProductReport {
             // Void calls to discard the customer info and sales tax from the file copy.
             customerInfo(fileCopy);
             fileCopy.nextDouble();
+            customerInfo(fileCopy2);
+            fileCopy2.nextDouble();
 
             // Two Queues to run through for fulfilled (using Queue) and delayed (using Stack).
             Queue<Product> orders = orders(file);
             Queue<Product> ordersCopy = orders(fileCopy);
+            Queue<Product> ordersCopy2 = orders(fileCopy2);
 
             // Create a Queue to hold all the products in stock.
             Queue<Product> fulfilled = fulfilledOrders(orders);
 
             // Create a stack to hold all the products not in stock.
             Stack<Product> delayed = delayedOrders(ordersCopy);
+            Stack<Product> delayedCopy = delayedOrders(ordersCopy2);
 
             // Print out the Fulfilled part of the order.
             System.out.println("");
@@ -336,7 +432,27 @@ public class ProductReport {
             customerInfoToString(customer);
             reportDelayedOrders(delayed);
 
+            /*
+             * File output (Extra-credit)
+             */
+
+            //Ask the user if they want to create the output file.
+            System.out.print(
+                    "Do you want to create a file of delayed products [y]es/[n]o: ");
+            Scanner out = new Scanner(System.in);
+            String outResponse = out.nextLine();
+
+            // Check for response and execute appropriately
+            if ((outResponse.equals("y")) || (outResponse.equals("Y"))) {
+                // Execute the output file generator
+                fileOutput(delayedCopy);
+            } else {
+                // End the program.
+                System.out.println("Thank you for using this program!");
+            }
+
             // Close all the i/o streams to prevent i/o leaks.
+            out.close();
             file.close();
 
         } catch (IOException e) {
