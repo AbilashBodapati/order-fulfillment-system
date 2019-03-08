@@ -1,5 +1,5 @@
 
-package mainProgram;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -77,6 +77,8 @@ public class ProductReport {
             ArrayList<String> customer = customerInfo(file);
             customerInfoToString(customer);
             double salesTax = salesTax(file);
+
+            Product prod = new SimpleProduct();
 
             file.close();
 
