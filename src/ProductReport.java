@@ -10,8 +10,11 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * Main Reporting UI for Customers to Interact. Has the extra credit for output
- * file generator implemented.
+ * Main Reporting UI for Customers to Interact.
+ *
+ * Has the extra credit for output file generator implemented.
+ *
+ * [check method: fileOutput].
  *
  * @author Abilash Bodapati
  * @version 20190222
